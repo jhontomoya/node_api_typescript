@@ -1,0 +1,28 @@
+import express from 'express';
+import * as Routes from '../../api';
+import * as database from '../connection/database'; 
+
+/**
+ * @constant {express.Application}
+ */
+ const app: express.Application = express();
+
+ /**
+ * @constructs express.Application Routes
+ */
+  Routes.init(app);
+
+  /**
+   * Database connection
+   */
+   database.initDatabase();
+
+  /**
+   * sets port 3000 to default or unless otherwise specified in the environment
+   */
+  app.set('port', process.env.PORT || 3000);
+
+  /**
+   * @exports {express.Application}
+   */
+ export default app;
