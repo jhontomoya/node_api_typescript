@@ -3,8 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=angular,swift,dotnetcore
 
 # compiled output
-build/
+build
 
 # dependencies
-node_modules/
-
+node_modules
