@@ -3,7 +3,7 @@ import { ResponseTO } from '../../to/responseTO';
 
 export interface IAuthFacade{
   signup(userTo: UserTO): Promise<ResponseTO>;
-  login(userTo: UserTO): void;
-  profile(userTo: UserTO): void;
-  logout(): void;
+  login(userTo: UserTO): Promise<ResponseTO>;
+  profile(userTo: UserTO): Promise<ResponseTO>;
+  logout(): Promise<ResponseTO>;
 }

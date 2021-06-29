@@ -1,6 +1,7 @@
 import express from 'express';
 import * as Routes from '../../api';
 import * as database from '../connection/database'; 
+import * as Middleware from '../middleware/middleware';
 
 /**
  * @constant {express.Application}
@@ -15,7 +16,12 @@ import * as database from '../connection/database';
   /**
    * Database connection
    */
-   database.initDatabase();
+  database.initDatabase();
+
+  /**
+  * @constructs express.Application Error Handler
+  */
+  // Middleware.initErrorHandler(app);
 
   /**
    * sets port 3000 to default or unless otherwise specified in the environment

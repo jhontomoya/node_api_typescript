@@ -1,5 +1,11 @@
+import { Request } from 'express';
 import { UserTO } from "../../to/userTO";
 import User, { IUser } from "../../model/userModel";
+
+export const transformReqToTo = async (req: Request): Promise<UserTO> => {
+  const { email, password, username, id } = req.body;
+  return new UserTO(email, password, username, id);
+}
 
 export const transformToToDo = async (user: UserTO): Promise<IUser> => {
   return new User({

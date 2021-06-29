@@ -1,11 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
 import AuthFacade from './facade';
-import { UserTO } from "../../to/userTO";
+import { AuthTransformer } from "../../transformers/index"
 
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { email, password, username } = req.body;
-    const user = new UserTO(email, password, username);
+    const user = await AuthTransformer.transformReqToTo(req);
     let response = await AuthFacade.signup(user);
     res.status(response.statusCode).json(response);
   } catch (error) {
@@ -13,9 +12,11 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
   }
 }
 
-export const login = (req: Request, res: Response, next: NextFunction) => {
+export const login = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.send('login');
+    const user = await AuthTransformer.transformReqToTo(req);
+    let response = await AuthFacade.login(user);
+    res.status(response.statusCode).json(response);
   } catch (error) {
     console.log(error);
   }
