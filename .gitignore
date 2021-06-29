@@ -1,9 +1,9 @@
-
-# Created by https://www.toptal.com/developers/gitignore/api/angular,swift,dotnetcore
-# Edit at https://www.toptal.com/developers/gitignore?templates=angular,swift,dotnetcore
-
 # compiled output
 build
 
 # dependencies
 node_modules
+
+#test
+.nyc_output
+coverage
