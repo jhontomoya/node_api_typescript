@@ -15,7 +15,7 @@ pipeline{
   stages {
     stage('Api Node ts sonar') {
       steps{
-        dir('/'){
+        //dir('/'){
           sh 'npm i -D nyc mocha source-map-support ts-node @istanbuljs/nyc-config-typescript'
           sh 'npm run coverage'
           sh "/opt/sonar-scanner/bin/sonar-scanner \
@@ -28,7 +28,7 @@ pipeline{
             -Dsonar.sourceEncoding=UTF-8 \
             -Dsonar.tests=tests \
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info"
-        }
+        //}
       }
     }
   }
