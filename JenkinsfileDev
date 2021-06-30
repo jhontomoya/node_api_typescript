@@ -2,10 +2,10 @@ pipeline{
   agent {
     label 'ApiNodeTs'
   }
-  tools {
+  //tools {
     //maven 'M3'
     //nodejs 'NodeJs12'
-  }
+  //}
   environment{
     // General configurations		
     SONAR_KEY = "Api-Node-ts";
