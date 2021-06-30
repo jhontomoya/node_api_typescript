@@ -1,0 +1,38 @@
+pipeline{
+  tools {
+    maven 'M3'
+    nodejs 'NodeJs12'
+  }
+  environment{
+    // General configurations		
+    SONAR_KEY = "Api-Node-ts";
+    SONAR_SERVER = "http://localhost:9000";
+    SONAR_TOKEN = "6d5b5eeb63e8cf36b9fb9a3294034a96b5c1ef3b";
+    //SONAR_COVERAGE_EXCLUSIONS_NODEJS = "src/api/**,src/commons/**,src/config/**,src/models/**,src/to/**,src/facade/index.ts,src/facade/**/index.ts,src/config/env/index.ts";
+    //SONAR_EXCLUSIONS_NODEJS = "src/config/**,src/to/**,src/api/**,src/models/**,src/commons/**";
+    COMMITER_EMAIL = sh(
+    	script: 'git --no-pager show -s --format=\'%an - %ae\'',
+    	returnStdout: true
+    ).trim()
+  }
+  stages {
+    stage('Api Node ts sonar') {
+      steps{
+        dir('/'){
+          sh 'npm i -D nyc mocha source-map-support ts-node @istanbuljs/nyc-config-typescript'
+          sh 'npm run coverage'
+          sh "/opt/sonar-scanner/bin/sonar-scanner \
+            -Dsonar.projectKey=20_${COMPANY}_${PROJECT_NAME}_catalogos_${ENVIRONMENT} \
+            -Dsonar.sources=src \
+            -Dsonar.exclusions=${SONAR_EXCLUSIONS_NODEJS} \
+            -Dsonar.coverage.exclusions=${SONAR_COVERAGE_EXCLUSIONS_NODEJS} \
+            -Dsonar.host.url=${SONAR_SERVER} \
+            -Dsonar.login=${SONAR_TOKEN} \
+            -Dsonar.sourceEncoding=UTF-8 \
+            -Dsonar.tests=tests \
+            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info"
+        }
+      }
+    }
+  }
+}

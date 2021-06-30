@@ -1,5 +1,5 @@
 import { IAuthService } from "./interface";
-import { IUser } from "../../model/userModel";
+import User, { IUser } from "../../model/userModel";
 
 const AuthService: IAuthService = {
 
@@ -7,8 +7,8 @@ const AuthService: IAuthService = {
     return user.save();
   },
 
-  login(user: IUser): void {
-    console.log(user);
+  async login(email: string): Promise<IUser | any> {
+    return User.findOne({email: email});
   },
 
   profile(user: IUser): void {

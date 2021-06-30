@@ -1,3 +1,4 @@
+import { login } from './index';
 import { AuthService, TokenService } from "../../service";
 import { IAuthFacade } from './interface';
 import { UserTO } from "../../to/userTO";
@@ -15,7 +16,7 @@ const AuthFacade: IAuthFacade = {
   },
 
   async login(userTo: UserTO): Promise<ResponseTO> {
-    const user: IUser | null = await User.findOne({email: userTo.email});
+    const user: IUser | null = await AuthService.login(userTo.email);
     if(!user) return ResponseTransformer.response(404, "No se encuentra registrado el email.",);
     const correctPassword: boolean = await user.validatePassword(userTo.password, user.password);
     if(!correctPassword) return ResponseTransformer.response(404, "Usuario y/o contraseña incorrectos.",);

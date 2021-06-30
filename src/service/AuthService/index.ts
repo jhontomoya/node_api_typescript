@@ -4,3 +4,7 @@ import { IUser } from "../../model/userModel";
 export async function signup(user: IUser): Promise<IUser> {
   return AuthService.signup(user);
 }
+
+export async function login(email: string): Promise<IUser | any> {
+  return AuthService.login(email);
+}
