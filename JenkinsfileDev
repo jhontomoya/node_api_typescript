@@ -11,7 +11,7 @@ pipeline{
     SONAR_KEY = "Api-Node-ts";
     SONAR_SERVER = "http://localhost:9000";
     SONAR_TOKEN = "6d5b5eeb63e8cf36b9fb9a3294034a96b5c1ef3b";
-    SONAR_COVERAGE_EXCLUSIONS_NODEJS = "src/api/**,src/commons/**,src/config/**,src/model/**,src/to/**,src/facade/index.ts,src/facade/**/index.ts,src/config/env/index.ts",src/transformers/**;
+    SONAR_COVERAGE_EXCLUSIONS_NODEJS = "src/api/**,src/commons/**,src/config/**,src/model/**,src/to/**,src/facade/index.ts,src/facade/**/index.ts,src/config/env/index.ts,src/transformers/**";
     SONAR_EXCLUSIONS_NODEJS = "src/config/**,src/to/**,src/api/**,src/model/**,src/commons/**";
     COMMITER_EMAIL = sh(
     	script: 'git --no-pager show -s --format=\'%an - %ae\'',
