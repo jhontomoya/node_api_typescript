@@ -1,7 +1,7 @@
 pipeline{
-  agent {
-    label 'ApiNodeTs'
-  }
+  //agent {
+    //label 'ApiNodeTs'
+  //}
   //tools {
     //maven 'M3'
     //nodejs 'NodeJs12'
@@ -36,6 +36,23 @@ pipeline{
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info"
         }
       }
+    }
+  }
+  post {
+    always {
+      deleteDir()
+    }
+    success {
+      echo 'I succeeeded!'
+    }
+    unstable {
+      echo 'I am unstable :/'
+    }
+    failure {
+      echo 'I failed :('
+    }
+    changed {
+      echo 'Things were different before...'
     }
   }
 }
