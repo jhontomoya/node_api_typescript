@@ -15,11 +15,13 @@ pipeline{
     	script: 'git --no-pager show -s --format=\'%an - %ae\'',
     	returnStdout: true
     ).trim()
+    scannerHome = tool 'SonarQube'
   }
   stages {
     stage('Api Node ts sonar') {
       steps{
         //dir('/'){
+          sh '${scannerHome}/bin/sonar-scanner --version'
           sh 'npm i -D nyc mocha source-map-support ts-node @istanbuljs/nyc-config-typescript'
           sh 'npm run coverage'
           sh "/opt/sonar-scanner/bin/sonar-scanner \
