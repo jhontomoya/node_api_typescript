@@ -21,10 +21,9 @@ pipeline{
     stage('Api Node ts sonar') {
       steps{
         //dir('/'){
-          sh '${scannerHome}/bin/sonar-scanner --version'
           sh 'npm i -D nyc mocha source-map-support ts-node @istanbuljs/nyc-config-typescript'
           sh 'npm run coverage'
-          sh "/opt/sonar-scanner/bin/sonar-scanner \
+          sh "${scannerHome}/bin/sonar-scanner \
             -Dsonar.projectKey=Api-Node-ts \
             -Dsonar.sources=src \
             -Dsonar.exclusions=${SONAR_EXCLUSIONS_NODEJS} \
