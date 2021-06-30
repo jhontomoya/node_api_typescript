@@ -1,5 +1,9 @@
 pipeline{
   agent any
+  tools {
+    maven 'M3'
+    nodejs 'NodeJs14'
+  }
   environment{
     // General configurations		
     SONAR_KEY = "Api-Node-ts";
