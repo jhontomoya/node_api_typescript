@@ -1,7 +1,8 @@
-import { ITokenService } from "./interface";
-import { IUser } from "../../model/userModel";
 import jwt from 'jsonwebtoken';
 import config from '../../config/env/index';
+import { ITokenService } from "./interface";
+import { IUser } from "../../model/userModel";
+import { TokenTransformer } from "../../transformer/index"
 
 const TokenService: ITokenService = {
   async createAccessToken(user: IUser): Promise<string> {
@@ -29,16 +30,12 @@ const TokenService: ITokenService = {
       }, 
       config.REFRESH_TOKEN, 
       { 
-        expiresIn: '20d'
+        expiresIn: '1d'
       }
     );
+    let token = await TokenTransformer.transformToToDo(refreshToken, user._id);
+    await token.save();
     return refreshToken;
-    // try {
-    //   await new Token({token: refreshToken}).save();
-    //   return refreshToken;
-    // } catch (error) {
-    //   next(new Error('Error creating refresfh token'));
-    // }
   }
 
 }

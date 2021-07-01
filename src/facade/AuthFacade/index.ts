@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import AuthFacade from './facade';
-import { AuthTransformer } from "../../transformers/index"
+import { AuthTransformer, ResponseTransformer } from "../../transformer/index"
 
 export const signup = async (req: Request, res: Response, next: NextFunction) => {
   try {
@@ -9,6 +9,8 @@ export const signup = async (req: Request, res: Response, next: NextFunction) =>
     res.status(response.statusCode).json(response);
   } catch (error) {
     console.log(error);
+    let err = await ResponseTransformer.responseInternalErrorServe(error);
+    res.status(err.statusCode).json(err);
   }
 }
 
@@ -19,21 +21,29 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
     res.status(response.statusCode).json(response);
   } catch (error) {
     console.log(error);
+    let err = await ResponseTransformer.responseInternalErrorServe(error);
+    res.status(err.statusCode).json(err);
   }
 }
 
-export const profile = (req: Request, res: Response, next: NextFunction) => {
+export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.send('profile');
+    let response = await AuthFacade.refreshToken(req.body.userId, req.body.refreshToken);
+    res.status(response.statusCode).json(response);
   } catch (error) {
     console.log(error);
+    let err = await ResponseTransformer.responseInternalErrorServe(error);
+    res.status(err.statusCode).json(err);
   }
 }
 
-export const logout = (req: Request, res: Response, next: NextFunction) => {
+export const logout = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    res.send('logout');
+    let response = await AuthFacade.logout(req.body.userId);
+    res.status(response.statusCode).json(response);
   } catch (error) {
     console.log(error);
+    let err = await ResponseTransformer.responseInternalErrorServe(error);
+    res.status(err.statusCode).json(err);
   }
 }

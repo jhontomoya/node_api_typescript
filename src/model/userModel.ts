@@ -9,24 +9,29 @@ export interface IUser extends Document {
     validatePassword(password: string, hash: string): Promise<boolean>;
 }
 
-const UserSchema = new Schema({
-  username: {
-    type: String,
-    required: true,
-    min: 4,
-    lowercase: true
+const UserSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      min: 4,
+      lowercase: true
+    },
+    email: {
+      type: String,
+      unique: true,
+      required: true,
+      lowercase: true
+    },
+    password: {
+      type: String,
+      required: true
+    }
   },
-  email: {
-    type: String,
-    unique: true,
-    required: true,
-    lowercase: true
-  },
-  password: {
-    type: String,
-    required: true
+  {
+    timestamps: true
   }
-});
+);
 
 UserSchema.methods.encryptPassword = async (password: string): Promise<string> => {
   const salt = await bcrypt.genSalt(10); //para generar un string adicional para un cifrado unico, se hace el algoritmo 10 veces

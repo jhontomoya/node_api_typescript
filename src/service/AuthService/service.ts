@@ -8,16 +8,20 @@ const AuthService: IAuthService = {
   },
 
   async login(email: string): Promise<IUser | any> {
+    return this.findUserByEmail(email);
+  },
+
+  async logout(userId: string): Promise<IUser | any>{
+    return this.findUserById(userId);
+  },
+
+  async findUserById(userId: string): Promise<IUser | any> {
+    return User.findById(userId);
+  },
+
+  async findUserByEmail(email: string): Promise<IUser | any> {
     return User.findOne({email: email});
   },
-
-  profile(user: IUser): void {
-    console.log(user);
-  },
-
-  logout(): void {
-    console.log("Logout");
-  }
 
 }
 

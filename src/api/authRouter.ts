@@ -9,7 +9,7 @@ const router: Router = Router();
 
 router.post('/signup', AuthFacade.signup);
 router.post('/login', AuthFacade.login);
-router.get('/profile', validateAuth, AuthFacade.profile);
+router.post('/refresh-token', AuthFacade.refreshToken);
 router.post('/logout', AuthFacade.logout);
 
 /**
