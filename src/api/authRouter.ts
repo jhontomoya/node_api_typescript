@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { AuthFacade } from '../facade';
-import { validateAuth } from '../config/middleware/middleware';
 
 /**
  * @constant {express.Router}

@@ -5,7 +5,9 @@ import morgan from 'morgan';
 var timeout = require('connect-timeout');
 import config from '../config/env/index';
 
+import { validateAuth } from '../config/middleware/middleware';
 import AuthRouter from './authRouter';
+import UserRouter from './userRouter';
 
 /**
  * @export
@@ -53,7 +55,8 @@ export function init(app: express.Application): void {
     * @description Forwards any requests to the /auth URI to our AuthRouter
     * @constructs
     */
-  app.use('/', AuthRouter);
+  app.use('/api/auth', AuthRouter);
+  app.use('/api/users', validateAuth, UserRouter)
 
 
 

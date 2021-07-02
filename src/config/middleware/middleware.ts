@@ -22,7 +22,6 @@ export const validateAuth = async (req: Request, res: Response, next: NextFuncti
       try {
         const payload = jwt.verify(token, config.ACCESS_TOKEN) as IPayload;
         req.user = payload.user;
-        next();
       } catch (error) {
         if(error.name === 'TokenExpiredError'){
           let err = await ResponseTransformer.responseUnauthorized("Token Expired");
