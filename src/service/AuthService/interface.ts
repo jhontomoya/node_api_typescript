@@ -6,4 +6,6 @@ export interface IAuthService {
   logout(userId: string): Promise<IUser | any>;
   findUserById(userId: string): Promise<IUser | any>;
   findUserByEmail(email: string): Promise<IUser | any>;
+  encryptPassword(user: IUser): Promise<string>;
+  validatePassword(user: IUser, password: string): Promise<boolean>;
 }

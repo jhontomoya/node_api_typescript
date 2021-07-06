@@ -28,7 +28,7 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
 export const refreshToken = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    let response = await AuthFacade.refreshToken(req.body.userId, req.body.refreshToken);
+    let response = await AuthFacade.refreshToken(req.body.refreshToken);
     res.status(response.statusCode).json(response);
   } catch (error) {
     console.log(error);

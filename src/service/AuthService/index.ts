@@ -20,3 +20,11 @@ export async function findUserById(userId: string): Promise<IUser | any> {
 export async function findUserByEmail(email: string): Promise<IUser | any> {
   return AuthService.findUserByEmail(email);
 }
+
+export async function encryptPassword(user: IUser): Promise<string> {
+  return AuthService.encryptPassword(user);
+}
+
+export async function validatePassword(user: IUser, password: string): Promise<boolean> {
+  return AuthService.validatePassword(user, password);
+}

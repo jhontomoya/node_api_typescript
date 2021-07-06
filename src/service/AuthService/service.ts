@@ -23,6 +23,14 @@ const AuthService: IAuthService = {
     return User.findOne({email: email});
   },
 
+  async encryptPassword(user: IUser): Promise<string> {
+    return user.encryptPassword(user.password);
+  },
+
+  async validatePassword(user: IUser, password: string): Promise<boolean> {
+    return user.validatePassword(password, user.password);
+  }
+
 }
 
 export default AuthService;

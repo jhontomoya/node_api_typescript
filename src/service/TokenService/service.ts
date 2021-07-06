@@ -43,7 +43,11 @@ const TokenService: ITokenService = {
     return Token.findOneAndRemove({userId: userId})
   },
 
-  async findSession(userId: string): Promise<IToken | any>{
+  async findSessionByToken(refreshToken: string): Promise<IToken | any>{
+    return Token.findOne({token: refreshToken})
+  },
+
+  async findSessionByUserId(userId: string): Promise<IToken | any>{
     return Token.findOne({userId: userId})
   }
 

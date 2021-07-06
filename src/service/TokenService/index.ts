@@ -14,6 +14,10 @@ export async function deleteToken(userId: string): Promise<IToken | any>{
   return TokenService.deleteToken(userId);
 }
 
-export async function findSession(userId: string): Promise<IToken | any>{
-  return TokenService.findSession(userId);
+export async function findSessionByToken(refreshToken: string): Promise<IToken | any>{
+  return TokenService.findSessionByToken(refreshToken);
+}
+
+export async function findSessionByUserId(userId: string): Promise<IToken | any>{
+  return TokenService.findSessionByUserId(userId);
 }

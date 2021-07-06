@@ -11,7 +11,7 @@ const AuthFacade: IAuthFacade = {
     if(!userTo.password) return ResponseTransformer.responseBadRequest('Missing parameters');
     if(!userTo.username) return ResponseTransformer.responseBadRequest('Missing parameters');
     const user: IUser = await AuthTransformer.transformToToDo(userTo);
-    user.password = await user.encryptPassword(user.password);
+    user.password = await AuthService.encryptPassword(user);
     const savedUser: IUser = await AuthService.signup(user);
     const newUser =  await AuthTransformer.transformDoToTo(savedUser);
     let data = {
@@ -26,7 +26,7 @@ const AuthFacade: IAuthFacade = {
     const user: IUser | null = await AuthService.login(userTo.email);
     if(!user) return ResponseTransformer.responseNotFound("User not found");
     const userRes =  await AuthTransformer.transformDoToTo(user);
-    const correctPassword: boolean = await user.validatePassword(userTo.password, user.password);
+    const correctPassword: boolean = await AuthService.validatePassword(user, userTo.password);
     if(!correctPassword) return ResponseTransformer.responseNotFound("Incorrect User and/or Password");
     const token_access: string = await TokenService.createAccessToken(user);
     const refresh_token: string = await TokenService.createRefreshToken(user);
@@ -38,13 +38,14 @@ const AuthFacade: IAuthFacade = {
     return ResponseTransformer.responseSuccess("Login successfully", data);
   },
 
-  async refreshToken(userId: string, refreshToken: string): Promise<ResponseTO> {
-    if(!userId) return ResponseTransformer.responseBadRequest('Missing parameters');
+  async refreshToken(refreshToken: string): Promise<ResponseTO> {
     if(!refreshToken) return ResponseTransformer.responseBadRequest('Missing parameters');
-    const user: IUser | null = await AuthService.findUserById(userId);
+    const token = await TokenService.findSessionByToken(refreshToken);
+    if(!token) return ResponseTransformer.responseNotFound("Session not found");
+    const user: IUser | null = await AuthService.findUserById(token.userId);
     if(!user) return ResponseTransformer.responseNotFound("User not found");
-    const userRes =  await AuthTransformer.transformDoToTo(user);
     const token_access: string = await TokenService.createAccessToken(user);
+    const userRes =  await AuthTransformer.transformDoToTo(user);
     let data = {
       user: userRes,
       token_access: token_access,
@@ -57,7 +58,7 @@ const AuthFacade: IAuthFacade = {
     if(!userId) return ResponseTransformer.responseBadRequest('Missing parameters');
     const user: IUser | null = await AuthService.logout(userId);
     if(!user) return ResponseTransformer.responseNotFound("User not found");
-    const token = await TokenService.findSession(userId);
+    const token = await TokenService.findSessionByUserId(userId);
     if(!token) return ResponseTransformer.responseNotFound("Session logout");
     await TokenService.deleteToken(user._id);
     return ResponseTransformer.responseSuccess("Logout successfully");
