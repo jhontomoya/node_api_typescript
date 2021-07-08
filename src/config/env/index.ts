@@ -20,7 +20,20 @@ interface IConfig {
   logger_level: string;
   ACCESS_TOKEN: string;
   REFRESH_TOKEN: string;
-  psdMock: string;
+  DATA_MOCK: {
+    USR: {
+      usr: string;
+      mail: string;
+      pdw: string;
+      id: string
+    }
+    TKN: {
+      rfh_tkn: string;
+      usr_id: string;
+      id: string;
+      acc_tkn: string;
+    }
+  }
 }
 
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
@@ -43,7 +56,20 @@ const development: IConfig = {
   logger_level: process.env.LOGGER_LEVEL || 'debug',
   ACCESS_TOKEN: process.env.ACCESS_TOKEN || '',
   REFRESH_TOKEN: process.env.REFRESH_TOKEN || '',
-  psdMock: 'passEncrypt'
+  DATA_MOCK: {
+    USR: {
+      usr: process.env.MOCK_USR_NM || 'TestTest',
+      mail: process.env.MOCK_USR_MAIL || 'test@mail.com',
+      pdw: process.env.MOCK_USR_PDW || 'passEncrypt',
+      id: process.env.MOCK_USR_ID || 'xx00'
+    },
+    TKN: {
+      rfh_tkn: process.env.MOCK_TKN_RFH || 'refresh_token',
+      usr_id: process.env.MOCK_USR_ID || 'xx00',
+      id: process.env.MOCK_TKN_ID || 'xx01',
+      acc_tkn: process.env.MOCK_TKN_ACC || 'access_token',
+    }
+  }
 };
 
 

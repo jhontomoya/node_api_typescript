@@ -1,46 +1,46 @@
 import config from '../../src/config/env/index';
 
 export const userModelMock = {
-  username: 'TestTest',
-  email: 'test@mail.com',
-  password: config.psdMock,
-  _id: 'xx00',
+  username: config.DATA_MOCK.USR.usr,
+  email: config.DATA_MOCK.USR.mail,
+  password: config.DATA_MOCK.USR.pdw,
+  _id: config.DATA_MOCK.USR.id,
 };
 
 export const userMock = {
-  username: 'TestTest',
-  email: 'test@mail.com',
-  password: config.psdMock,
-  id: 'xx00',
+  username: config.DATA_MOCK.USR.usr,
+  email: config.DATA_MOCK.USR.mail,
+  password: config.DATA_MOCK.USR.pdw,
+  id: config.DATA_MOCK.USR.id,
 }; 
 
 export const userWithoutEmailMock = {
-  username: 'TestTest',
-  password: config.psdMock,
-  id: 'xx00',
+  username: config.DATA_MOCK.USR.usr,
+  password: config.DATA_MOCK.USR.pdw,
+  id: config.DATA_MOCK.USR.id,
 };
 
 export const userWithoutPasswordMock = {
-  username: 'TestTest',
-  email: 'test@mail.com',
-  id: 'xx00',
+  username: config.DATA_MOCK.USR.usr,
+  email: config.DATA_MOCK.USR.mail,
+  id: config.DATA_MOCK.USR.id,
 };
 
 export const userWithoutUsernameMock = {
-  email: 'test@mail.com',
-  password: config.psdMock,
-  id: 'xx00',
+  email: config.DATA_MOCK.USR.mail,
+  password: config.DATA_MOCK.USR.pdw,
+  id: config.DATA_MOCK.USR.id,
 };
 
 export const loginMock = {
-  email: 'test@mail.com',
-  password: config.psdMock,
+  email: config.DATA_MOCK.USR.mail,
+  password: config.DATA_MOCK.USR.pdw,
 };
 
 export const loginWithoutEmailMock = {
-  password: config.psdMock,
+  password: config.DATA_MOCK.USR.pdw,
 };
 
 export const loginWithoutPasswordMock = {
-  email: 'test@mail.com',
+  email: config.DATA_MOCK.USR.mail,
 };

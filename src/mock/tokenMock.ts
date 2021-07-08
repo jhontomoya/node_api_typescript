@@ -1,8 +1,10 @@
+import config from '../../src/config/env/index';
+
 export const tokenMock = {
-  token: 'refresh_token',
-  userId: 'xx00',
-  id: 'xx01',
+  token: config.DATA_MOCK.TKN.rfh_tkn,
+  userId: config.DATA_MOCK.TKN.usr_id,
+  id: config.DATA_MOCK.TKN.id,
 };
 
-export const accessTokenMock = "access_token";
-export const refreshTokenMock = "refresh_token";
+export const accessTokenMock = config.DATA_MOCK.TKN.acc_tkn;
+export const refreshTokenMock = config.DATA_MOCK.TKN.rfh_tkn;
