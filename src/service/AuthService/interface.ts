@@ -1,7 +1,7 @@
 import { IUser } from "../../model/userModel";
 
 export interface IAuthService {
-  signup(user: IUser): Promise<IUser>;
+  signup(user: IUser | any): Promise<IUser | any>;
   login(email: string): Promise<IUser | any>;
   logout(userId: string): Promise<IUser | any>;
   findUserById(userId: string): Promise<IUser | any>;

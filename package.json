@@ -54,15 +54,17 @@
     "include": [
       "src/facade/**/*.ts",
       "src/facade/*.ts",
-      "src/services/**/*.ts",
-      "src/services/*.ts"
+      "src/service/**/*.ts",
+      "src/service/*.ts"
     ],
     "extension": [
       ".ts"
     ],
     "exclude": [
       "src/facade/index.ts",
-      "src/facade/**/index.ts"
+      "src/facade/**/index.ts",
+      "src/service/index.ts",
+      "src/service/**/index.ts"
     ],
     "require": [
       "ts-node/register"

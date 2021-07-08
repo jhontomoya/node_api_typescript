@@ -3,7 +3,7 @@ import User, { IUser } from "../../model/userModel";
 
 const AuthService: IAuthService = {
 
-  async signup(user: IUser): Promise<IUser> {
+  async signup(user: IUser): Promise<IUser | any> {
     return user.save();
   },
 
