@@ -20,6 +20,7 @@ interface IConfig {
   logger_level: string;
   ACCESS_TOKEN: string;
   REFRESH_TOKEN: string;
+  psdMock: string;
 }
 
 const NODE_ENV: string = process.env.NODE_ENV || 'development';
@@ -42,6 +43,7 @@ const development: IConfig = {
   logger_level: process.env.LOGGER_LEVEL || 'debug',
   ACCESS_TOKEN: process.env.ACCESS_TOKEN || '',
   REFRESH_TOKEN: process.env.REFRESH_TOKEN || '',
+  psdMock: 'passEncrypt'
 };
 
 
